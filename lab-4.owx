@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns="http://example.org/magnit#"
+         xml:base="http://example.org/magnit">
+
+  <!-- Онтология -->
+  <owl:Ontology rdf:about="http://example.org/magnit"/>
+
+  <!-- Классы -->
+  <owl:Class rdf:about="#User"/>
+  <owl:Class rdf:about="#Reason"/>
+  <owl:Class rdf:about="#Step"/>
+  
+  <!-- Action с ограничением: каждое действие должно вызывать Event -->
+  <owl:Class rdf:about="#Action">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#вызывать"/>
+        <owl:someValuesFrom rdf:resource="#Event"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <!-- Подтипы Action с ограничениями на интерфейс -->
+  <owl:Class rdf:about="#View">
+    <rdfs:subClassOf rdf:resource="#Action"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#предполагать_взаимодействие_с"/>
+        <owl:allValuesFrom rdf:resource="#Screen"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Click">
+    <rdfs:subClassOf rdf:resource="#Action"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#предполагать_взаимодействие_с"/>
+        <owl:allValuesFrom rdf:resource="#Button"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Type">
+    <rdfs:subClassOf rdf:resource="#Action"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#предполагать_взаимодействие_с"/>
+        <owl:allValuesFrom rdf:resource="#Button"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Interface"/>
+  <owl:Class rdf:about="#Button">
+    <rdfs:subClassOf rdf:resource="#Interface"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Screen">
+    <rdfs:subClassOf rdf:resource="#Interface"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Event"/>
+
+  <!-- Object Properties -->
+  <owl:ObjectProperty rdf:about="#имеет_состояние"/>
+  <owl:ObjectProperty rdf:about="#быть_причиной"/>
+  <owl:ObjectProperty rdf:about="#предшествовать"/>
+  <owl:ObjectProperty rdf:about="#материализоваться_в"/>
+  <owl:ObjectProperty rdf:about="#быть_целевым_действием_для"/>
+  <owl:ObjectProperty rdf:about="#предполагать_взаимодействие_с"/>
+  <owl:ObjectProperty rdf:about="#вызывать"/>
+
+  <!-- Data Properties -->
+  <owl:DatatypeProperty rdf:about="#name"/>
+  <owl:DatatypeProperty rdf:about="#codename"/>
+
+  <!-- === ЭКЗЕМПЛЯРЫ === -->
+  <User rdf:about="#Пользователь_скидки"/>
+  <User rdf:about="#Пользователь_персональные_предложения"/>
+  <User rdf:about="#Новый_пользователь"/>
+
+  <Reason rdf:about="#Получить_скидку_на_первую_покупку"/>
+  <Reason rdf:about="#Получать_персональные_предложения"/>
+  <Reason rdf:about="#Узнать_о_текущих_акциях"/>
+
+  <Step rdf:about="#Начал_регистрацию"/>
+  <Step rdf:about="#Выбрал_способ_регистрации"/>
+  <Step rdf:about="#Ввел_данные"/>
+  <Step rdf:about="#Подтвердил_регистрацию"/>
+  <Step rdf:about="#Завершил_регистрацию"/>
+
+  <Click rdf:about="#Клик_на_регистрацию"/>
+  <Click rdf:about="#Выбор_телефона"/>
+  <Type rdf:about="#Ввод_телефона"/>
+  <Click rdf:about="#Отправка_кода"/>
+  <Type rdf:about="#Ввод_кода"/>
+  <Click rdf:about="#Подтверждение_регистрации"/>
+  <View rdf:about="#Показ_приветственного_экрана"/>
+
+  <Button rdf:about="#btn_register"/>
+  <Button rdf:about="#radio_phone"/>
+  <Button rdf:about="#btn_send_code"/>
+  <Button rdf:about="#btn_confirm"/>
+  <Screen rdf:about="#screen_welcome"/>
+
+  <Event rdf:about="#btn_register_click"/>
+  <Event rdf:about="#radio_phone_click"/>
+  <Event rdf:about="#btn_register_type"/>
+  <Event rdf:about="#btn_send_code_click"/>
+  <Event rdf:about="#btn_send_code_type"/>
+  <Event rdf:about="#btn_confirm_click"/>
+  <Event rdf:about="#screen_welcome_view"/>
+
+  <!-- === СВОЙСТВА name === -->
+  <rdf:Description rdf:about="#Пользователь_скидки">
+    <name>Пользователь, заинтересованный в скидках</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Пользователь_персональные_предложения">
+    <name>Пользователь, который хочет получать персональные предложения</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Новый_пользователь">
+    <name>Новый пользователь приложения</name>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Получить_скидку_на_первую_покупку">
+    <name>Получить скидку на первую покупку</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Получать_персональные_предложения">
+    <name>Зарегистрироваться, чтобы получать персональные предложения</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Узнать_о_текущих_акциях">
+    <name>Узнать о текущих акциях</name>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Начал_регистрацию">
+    <name>Начал регистрацию</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Выбрал_способ_регистрации">
+    <name>Выбрал способ регистрации</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввел_данные">
+    <name>Ввел данные</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Подтвердил_регистрацию">
+    <name>Подтвердил регистрацию</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Завершил_регистрацию">
+    <name>Завершил регистрацию</name>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Клик_на_регистрацию">
+    <name>Пользователь нажимает кнопку "Регистрация"</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Выбор_телефона">
+    <name>Пользователь выбирает опцию "Через телефон"</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввод_телефона">
+    <name>Пользователь вводит номер телефона</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Отправка_кода">
+    <name>Пользователь нажимает "Отправить код"</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввод_кода">
+    <name>Пользователь вводит SMS-код</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Подтверждение_регистрации">
+    <name>Пользователь нажимает "Подтвердить"</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Показ_приветственного_экрана">
+    <name>Отображается экран "Добро пожаловать!"</name>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#btn_register">
+    <name>Кнопка "Регистрация"</name>
+    <codename>btn_register</codename>
+  </rdf:Description>
+  <rdf:Description rdf:about="#radio_phone">
+    <name>Переключатель "Через телефон"</name>
+    <codename>radio_phone</codename>
+  </rdf:Description>
+  <rdf:Description rdf:about="#btn_send_code">
+    <name>Кнопка "Отправить код"</name>
+    <codename>btn_send_code</codename>
+  </rdf:Description>
+  <rdf:Description rdf:about="#btn_confirm">
+    <name>Кнопка "Подтвердить"</name>
+    <codename>btn_confirm</codename>
+  </rdf:Description>
+  <rdf:Description rdf:about="#screen_welcome">
+    <name>Экран "Приветствие"</name>
+    <codename>screen_welcome</codename>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#btn_register_click">
+    <name>btn_register_click</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#radio_phone_click">
+    <name>radio_phone_click</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#btn_register_type">
+    <name>btn_register_type</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#btn_send_code_click">
+    <name>btn_send_code_click</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#btn_send_code_type">
+    <name>btn_send_code_type</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#btn_confirm_click">
+    <name>btn_confirm_click</name>
+  </rdf:Description>
+  <rdf:Description rdf:about="#screen_welcome_view">
+    <name>screen_welcome_view</name>
+  </rdf:Description>
+
+  <!-- === СВЯЗИ === -->
+  <rdf:Description rdf:about="#Пользователь_скидки">
+    <имеет_состояние rdf:resource="#Получить_скидку_на_первую_покупку"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Пользователь_персональные_предложения">
+    <имеет_состояние rdf:resource="#Получать_персональные_предложения"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Новый_пользователь">
+    <имеет_состояние rdf:resource="#Узнать_о_текущих_акциях"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Получить_скидку_на_первую_покупку">
+    <быть_причиной rdf:resource="#Начал_регистрацию"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Получать_персональные_предложения">
+    <быть_причиной rdf:resource="#Начал_регистрацию"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Узнать_о_текущих_акциях">
+    <быть_причиной rdf:resource="#Начал_регистрацию"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Начал_регистрацию">
+    <предшествовать rdf:resource="#Выбрал_способ_регистрации"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Выбрал_способ_регистрации">
+    <предшествовать rdf:resource="#Ввел_данные"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввел_данные">
+    <предшествовать rdf:resource="#Подтвердил_регистрацию"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Подтвердил_регистрацию">
+    <предшествовать rdf:resource="#Завершил_регистрацию"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Начал_регистрацию">
+    <материализоваться_в rdf:resource="#Клик_на_регистрацию"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Выбрал_способ_регистрации">
+    <материализоваться_в rdf:resource="#Выбор_телефона"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввел_данные">
+    <материализоваться_в rdf:resource="#Ввод_телефона"/>
+    <материализоваться_в rdf:resource="#Отправка_кода"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Подтвердил_регистрацию">
+    <материализоваться_в rdf:resource="#Ввод_кода"/>
+    <материализоваться_в rdf:resource="#Подтверждение_регистрации"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Завершил_регистрацию">
+    <материализоваться_в rdf:resource="#Показ_приветственного_экрана"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Клик_на_регистрацию">
+    <предшествовать rdf:resource="#Выбор_телефона"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Выбор_телефона">
+    <предшествовать rdf:resource="#Ввод_телефона"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввод_телефона">
+    <предшествовать rdf:resource="#Отправка_кода"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Отправка_кода">
+    <предшествовать rdf:resource="#Ввод_кода"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввод_кода">
+    <предшествовать rdf:resource="#Подтверждение_регистрации"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Подтверждение_регистрации">
+    <предшествовать rdf:resource="#Показ_приветственного_экрана"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Клик_на_регистрацию">
+    <предполагать_взаимодействие_с rdf:resource="#btn_register"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Выбор_телефона">
+    <предполагать_взаимодействие_с rdf:resource="#radio_phone"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввод_телефона">
+    <предполагать_взаимодействие_с rdf:resource="#btn_register"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Отправка_кода">
+    <предполагать_взаимодействие_с rdf:resource="#btn_send_code"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввод_кода">
+    <предполагать_взаимодействие_с rdf:resource="#btn_send_code"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Подтверждение_регистрации">
+    <предполагать_взаимодействие_с rdf:resource="#btn_confirm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Показ_приветственного_экрана">
+    <предполагать_взаимодействие_с rdf:resource="#screen_welcome"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Завершил_регистрацию">
+    <быть_целевым_действием_для rdf:resource="#Получить_скидку_на_первую_покупку"/>
+    <быть_целевым_действием_для rdf:resource="#Получать_персональные_предложения"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#Клик_на_регистрацию">
+    <вызывать rdf:resource="#btn_register_click"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Выбор_телефона">
+    <вызывать rdf:resource="#radio_phone_click"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввод_телефона">
+    <вызывать rdf:resource="#btn_register_type"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Отправка_кода">
+    <вызывать rdf:resource="#btn_send_code_click"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ввод_кода">
+    <вызывать rdf:resource="#btn_send_code_type"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Подтверждение_регистрации">
+    <вызывать rdf:resource="#btn_confirm_click"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Показ_приветственного_экрана">
+    <вызывать rdf:resource="#screen_welcome_view"/>
+  </rdf:Description>
+
+</rdf:RDF>
